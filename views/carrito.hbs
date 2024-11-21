@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <div class="row">
+    <div class="col-md-8">
+        <h2>Carrito de Compras</h2>
+        {{#if carrito.length}}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each carrito}}
+                    <tr>
+                        <td>{{producto.nombre}}</td>
+                        <td>${{producto.precio}}</td>
+                        <td>{{cantidad}}</td>
+                        <td>${{multiplicar producto.precio cantidad}}</td>
+                        <td>
+                            <a href="/carrito/eliminar/{{producto.id}}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <div class="text-end">
+                <h4>Total: ${{total}}</h4>
+                <a href="/carrito/procesar" class="btn btn-success">Procesar Compra</a>
+            </div>
+        {{else}}
+            <div class="alert alert-info">
+                Su carrito esta vacío
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+</body>
+</html>

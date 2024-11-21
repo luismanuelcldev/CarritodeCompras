@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras Realizadas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="bg-blue-600 text-white p-4">
+            <h2 class="text-2xl font-bold">Compras Realizadas</h2>
+        </div>
+
+        {{#if compras.length}}
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        {{#each compras}}
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">{{fecha}}</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">{{usuario}}</td>
+                                <td class="px-4 py-4">
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        {{#each productos}}
+                                            <li class="flex justify-between">
+                                                <span>{{this.producto.nombre}}</span>
+                                                <span class="text-gray-500">
+                                                    {{this.cantidad}} x ${{this.producto.precio}}
+                                                </span>
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                                </td>
+                                <td class="px-4 py-4 text-sm font-semibold text-green-600">
+                                    ${{#each productos}}
+                                        {{multiplicar this.producto.precio this.cantidad}}
+                                    {{/each}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{else}}
+            <div class="p-6 text-center bg-blue-50 text-blue-800">
+                <svg class="mx-auto h-12 w-12 text-blue-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <p class="text-lg font-semibold">No se han realizado compras</p>
+                <p class="text-sm text-blue-600">Cuando realices compras, aparecerán aquí</p>
+            </div>
+        {{/if}}
+    </div>
+</body>
+</html>
